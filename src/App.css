@@ -1,0 +1,10 @@
+img {
+    height: 10em;
+    width: 20em;
+    border-radius: 1em;
+    object-fit: cover;
+}
+
+body {
+   margin: 1em;
+}
