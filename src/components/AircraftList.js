@@ -22,22 +22,24 @@ function AircraftList() {
             <h2>Our aircraft:</h2>
             { fleet.map( aircraft => {
                 return (
-                    <div>
+                    <div key={ aircraft.registration }>
                         <h3>{ aircraft.registration }</h3>
                         <img src={aircraft.image} alt="Cessna airplane" />
                         <table>
-                            <tr>
-                                <th>registration:</th>
-                                <tr>{ aircraft.registration }</tr>
-                            </tr>
-                            <tr>
-                                <th>type:</th>
-                                <tr>{ aircraft.type }</tr>
-                            </tr>
-                            <tr>
-                                <th>rent price:</th>
-                                <tr>{ aircraft.rentPrice } e/h ({ (aircraft.rentPrice / 60.00).toFixed(2) } e/min)</tr>
-                            </tr>
+                            <tbody>
+                                <tr>
+                                    <th>registration:</th>
+                                    <td>{ aircraft.registration }</td>
+                                </tr>
+                                <tr>
+                                    <th>type:</th>
+                                    <td>{ aircraft.type }</td>
+                                </tr>
+                                <tr>
+                                    <th>rent price:</th>
+                                    <td>{ aircraft.rentPrice } e/h ({ (aircraft.rentPrice / 60.00).toFixed(2) } e/min)</td>
+                                </tr>
+                            </tbody>
                         </table>
                     </div>
                 )

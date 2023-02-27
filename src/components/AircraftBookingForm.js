@@ -12,7 +12,7 @@ function AircraftBookingForm() {
 
     const [message, setMessage] = useState('');
 
-    //Temporary solution, doesn't actually add anything, database to be added
+    //temporary solution, doesn't actually add anything, database to be added
     const addBooking = (e) => {
 
         e.preventDefault();
@@ -23,6 +23,7 @@ function AircraftBookingForm() {
         
         //reset all user input fields when clicking submit
         } else {
+            console.log(booking);
             setValues( { firstName: '', lastName: '', phone: '', startTime: '', endTime: '' } );
             setMessage('');
         }
