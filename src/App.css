@@ -1,3 +1,7 @@
+body {
+   margin: 1em;
+}
+
 img {
     height: 10em;
     width: 20em;
@@ -5,6 +9,33 @@ img {
     object-fit: cover;
 }
 
-body {
-   margin: 1em;
+h2 {
+    color:brown
 }
+
+table {
+    text-align: left;
+    margin-top: 0.5em;
+    padding: 0.3em;
+    border: 0.1em solid;
+    border-radius: 0.5em;
+    border-collapse: separate;
+    border-color: darkgrey;
+}
+
+th, td {
+    padding-right: 1em;
+}
+
+input, select {
+    margin-top: 0.3em;
+    margin-bottom: 0.3em;
+    padding: 0.3em;
+    border: 0.1em solid;
+    border-radius: 0.5em;
+    border-color: darkgray;
+}
+
+input[type=submit]:hover {
+    background-color: darkseagreen;
+  }

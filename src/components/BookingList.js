@@ -23,30 +23,34 @@ function BookingList() {
     ]
 
     return (
-        bookings.map(booking => {
-            return (
-                <div key={ booking.bookingId }>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>aircraft:</th>
-                                <th>name:</th>
-                                <th>from:</th>
-                                <th>to:</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>{ booking.aircraft }</td>
-                                <td>{ booking.firstName } { booking.lastName }</td>
-                                <td>{ booking.startTime }</td>
-                                <td>{ booking.endTime }</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            )
-        })
+        <div>
+            <h2>Bookings</h2>
+            { bookings.map(booking => {
+                return (
+                    <div key={ booking.bookingId }>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>aircraft:</th>
+                                    <th>name:</th>
+                                    <th>from:</th>
+                                    <th>to:</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>{ booking.aircraft }</td>
+                                    <td>{ booking.firstName } { booking.lastName }</td>
+                                    <td>{ booking.startTime }</td>
+                                    <td>{ booking.endTime }</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                )
+            })
+        }
+        </div>
     )
 }
 

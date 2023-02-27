@@ -19,7 +19,7 @@ function AircraftList() {
 
     return (
         <div>
-            <h2>Our aircraft:</h2>
+            <h2>Our aircraft</h2>
             { fleet.map( aircraft => {
                 return (
                     <div key={ aircraft.registration }>
