@@ -25,7 +25,7 @@ function AircraftBookingForm() {
         //reset all user input fields when clicking submit
         } else {
             console.log(booking);
-            setValues( { firstName: '', lastName: '', phone: '', startTime: '', endTime: '' } );
+            setValues( { aircraft: '', firstName: '', lastName: '', phone: '', startTime: '', endTime: '' } );
             setMessage('');
         }
     }
