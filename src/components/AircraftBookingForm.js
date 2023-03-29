@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Button, FormControl, InputLabel, MenuItem, Select, TextField } from '@mui/material';
 
 function AircraftBookingForm() {
     const [booking, setValues] = useState({ 
@@ -37,35 +38,70 @@ function AircraftBookingForm() {
     };
 
     return (
-        <div>
-        <h2>Book an aircraft</h2>
-        <form>
-            <label htmlFor="aircraft">aircraft:</label><br />
-            <select name="aircraft" value={ booking.aircraft } onChange={ (e) => change(e) }>
-                <option value="OH-CAB (C152)">OH-CAB (C152)</option>
-                <option value="OH-CYZ (C172)">OH-CYZ (C172)</option>
-            </select><br />
-
-            <label htmlFor="firstName">first name:</label><br />
-            <input type="text" name="firstName" value={ booking.firstName } onChange={ (e) => change(e) }/><br />
-        
-            <label htmlFor="lastName">last name:</label><br />
-            <input type="text" name="lastName" value={ booking.lastName } onChange={ (e) => change(e) }/><br />
-        
-            <label htmlFor="phone">phone number:</label><br />
-            <input type="text" name="phone" value={ booking.phone } onChange={ (e) => change(e) }/><br />
-        
-            <label htmlFor="startTime">start time:</label><br />
-            <input type="datetime-local" name="startTime" value={ booking.startTime } onChange={ (e) => change(e) }/><br />
-
-            <label htmlFor="endTime">end time:</label><br />
-            <input type="datetime-local" name="endTime" value={ booking.endTime } onChange={ (e) => change(e) }/><br />
-
-            
-            <input type="submit" value="Submit" onClick={ (e) => addBooking(e) }/>
-            </form>
-        <p>{ message }</p>
-        </div>
+        <div style={{margin: '20px'}}>
+            <h2>Book an aircraft</h2>
+            <FormControl fullWidth style={{marginBottom: '10px'}}>
+                <InputLabel id="aircraft-label">Aircraft</InputLabel>
+                <Select
+                labelId="aircraft-label"
+                name="aircraft"
+                value={booking.aircraft}
+                label="Aircraft"
+                onChange={change}
+                >
+                <MenuItem value="OH-CAB (C152)">OH-CAB (C152)</MenuItem>
+                <MenuItem value="OH-CYZ (C172)">OH-CYZ (C172)</MenuItem>
+                </Select>
+            </FormControl>
+            <TextField
+                fullWidth
+                label="First Name"
+                name="firstName"
+                value={booking.firstName}
+                onChange={change}
+                style={{marginBottom: '10px'}}
+            />
+            <TextField
+                fullWidth
+                label="Last Name"
+                name="lastName"
+                value={booking.lastName}
+                onChange={change}
+                style={{marginBottom: '10px'}}
+            />
+            <TextField
+                fullWidth
+                label="Phone Number"
+                name="phone"
+                value={booking.phone}
+                onChange={change}
+                style={{marginBottom: '10px'}}
+            />
+            <TextField
+                fullWidth
+                label="Start Time"
+                type="datetime-local"
+                name="startTime"
+                value={booking.startTime}
+                onChange={change}
+                style={{marginBottom: '10px'}}
+                InputLabelProps={{ shrink: true }}
+            />
+            <TextField
+                fullWidth
+                label="End Time"
+                type="datetime-local"
+                name="endTime"
+                value={booking.endTime}
+                onChange={change}
+                style={{marginBottom: '10px'}}
+                InputLabelProps={{ shrink: true }}
+            />
+            <Button variant="contained" onClick={addBooking} style={{marginTop: '10px'}}>
+                Submit
+            </Button>
+            <p style={{marginTop: '10px'}}>{message}</p>
+            </div>
     )
 }
 
