@@ -1,3 +1,4 @@
+import { Table, TableBody, TableCell, TableHead, TableRow } from '@mui/material';
 
 function BookingList() {
     // temporary solution, database to be added
@@ -24,34 +25,29 @@ function BookingList() {
 
     return (
         <div>
-            <h2>Bookings</h2>
-            { bookings.map(booking => {
-                return (
-                    <div key={ booking.bookingId }>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>aircraft:</th>
-                                    <th>name:</th>
-                                    <th>from:</th>
-                                    <th>to:</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>{ booking.aircraft }</td>
-                                    <td>{ booking.firstName } { booking.lastName }</td>
-                                    <td>{ booking.startTime }</td>
-                                    <td>{ booking.endTime }</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                )
-            })
-        }
+          <h2>Bookings</h2>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell>Aircraft</TableCell>
+                <TableCell>Name</TableCell>
+                <TableCell>From</TableCell>
+                <TableCell>To</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {bookings.map((booking) => (
+                <TableRow key={booking.bookingId}>
+                  <TableCell>{booking.aircraft}</TableCell>
+                  <TableCell>{booking.firstName} {booking.lastName}</TableCell>
+                  <TableCell>{booking.startTime}</TableCell>
+                  <TableCell>{booking.endTime}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
         </div>
-    )
+      );
 }
 
 export default BookingList;
