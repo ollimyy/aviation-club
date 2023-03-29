@@ -2,13 +2,6 @@ body {
    margin: 1em;
 }
 
-img {
-    height: 10em;
-    width: 20em;
-    border-radius: 1em;
-    object-fit: cover;
-}
-
 h2 {
     color:brown
 }

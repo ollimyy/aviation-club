@@ -1,5 +1,6 @@
 import c152 from '../images/c152.jpg'
 import c172 from '../images/c172.jpg'
+import { Box, Card, CardContent, CardMedia, Typography} from '@mui/material'
 
 function AircraftList() {
     const fleet = [
@@ -18,35 +19,30 @@ function AircraftList() {
     ];
 
     return (
-        <div>
-            <h2>Our aircraft</h2>
-            { fleet.map( aircraft => {
-                return (
-                    <div key={ aircraft.registration }>
-                        <h3>{ aircraft.registration }</h3>
-                        <img src={aircraft.image} alt="Cessna airplane" />
-                        <table>
-                            <tbody>
-                                <tr>
-                                    <th>registration:</th>
-                                    <td>{ aircraft.registration }</td>
-                                </tr>
-                                <tr>
-                                    <th>type:</th>
-                                    <td>{ aircraft.type }</td>
-                                </tr>
-                                <tr>
-                                    <th>rent price:</th>
-                                    <td>{ aircraft.rentPrice } e/h ({ (aircraft.rentPrice / 60.00).toFixed(2) } e/min)</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+        <Box>
+            { fleet.map(aircraft => {
+                return(
+                    <Card key={ aircraft.registration } sx={{ maxWidth: 345, margin:2 }}>
+                        <CardMedia
+                            component="img"
+                            src={ aircraft.image }
+                            alt="Cessna airplane"
+                        />
+                    <CardContent>
+                        <Typography variant="h5" component="div">
+                            { aircraft.registration}
+                        </Typography>
+                        <Typography variant="subtitle1" component="div">
+                            { aircraft.type }
+                        </Typography>
+                        <Typography variant="body1">
+                        { aircraft.rentPrice } e/h ({ (aircraft.rentPrice / 60.00).toFixed(2) } e/min)
+                        </Typography>
+                    </CardContent>
+                    </Card>
                 )
-            })
-        }
-        <p>Rent price is calculated by minutes of air time. Fuel, landing fees and taxi time are included. </p>
-        </div>
+            })}
+        </Box>
     )
 }
 
