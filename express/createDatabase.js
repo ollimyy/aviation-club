@@ -56,8 +56,8 @@ db.serialize( () => {
 			  "id integer PRIMARY KEY NOT NULL, " +
 			  "start datetime NOT NULL, " +
 			  "end datetime NOT NULL, " +
-			  "aircraft_id integer NOT NULL," +
-			  "FOREIGN KEY (aircraft_id) REFERENCES aircraft(id))";
+			  "aircraft text NOT NULL," +
+			  "FOREIGN KEY (aircraft) REFERENCES aircraft(registration))";
 
 	db.run(sql, (err) => {
 		if (err) {
@@ -112,7 +112,7 @@ db.serialize( () => {
 
     // Bulletin inserts
     sql = "INSERT INTO `bulletin` (`id`, `title`, `date`, `text`) " +
-            "VALUES (1, 'Warning: Heavy Bird Activity', '2022-06-01', 'Attention all pilots: Due to the summer migration of birds, we are experiencing heavy bird activity in and around the airfield. Please take extra precautions when taking off and landing, and be sure to scan the runway and surrounding areas for birds before each flight.')"
+            "VALUES (1, 'Warning: Heavy Bird Activity', '2022-06-01', 'Due to the summer migration of birds, we are experiencing heavy bird activity in and around the airfield. Please take extra precautions when taking off and landing, and be sure to scan the runway and surrounding areas for birds before each flight.')"
 	db.run(sql, (err) => {
 		if (err) {
 		  return console.log(err.message);
@@ -121,7 +121,7 @@ db.serialize( () => {
 	})
 
     sql = "INSERT INTO `bulletin` (`id`, `title`, `date`, `text`) " +
-            "VALUES (2, 'Runway Construction Work', '2022-07-01', 'Attention all pilots: Construction work will be taking place on the runway from July 5th to July 15th. During this time, the runway will be closed and unavailable for use. We apologize for any inconvenience this may cause and appreciate your cooperation.')"
+            "VALUES (2, 'Runway Construction Work', '2022-07-01', 'Construction work will be taking place on the runway from July 5th to July 15th. During this time, the runway will be closed and unavailable for use. We apologize for any inconvenience this may cause and appreciate your cooperation.')"
 	db.run(sql, (err) => {
 		if (err) {
 		  return console.log(err.message);
@@ -156,8 +156,8 @@ db.serialize( () => {
 	})
 
 	// Booking inserts
-	sql = "INSERT INTO booking (id, start, end, aircraft_id) VALUES (1, '2023-04-25 10:00:00', '2023-04-25 12:00:00', 1), " +
-	"(2, '2023-04-27 08:00:00', '2023-04-27 10:00:00', 3);";
+	sql = "INSERT INTO booking (id, start, end, aircraft) VALUES (1, '2023-04-25 10:00:00', '2023-04-25 12:00:00', 'OH-CFF'), " +
+	"(2, '2023-04-27 08:00:00', '2023-04-27 10:00:00', 'OH-DAZ');";
 	db.run(sql, (err) => {
 		if (err) {
 		  return console.log(err.message);

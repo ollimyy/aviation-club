@@ -23,7 +23,7 @@ app.get('/', (req, res, next) => {
 
 app.get('/event/all', (req, res, next) => {
 	db.all('SELECT * FROM event', (error, results) => {
-		if (error) throwerror;
+		if (error) throw error;
 		return res.status(200).json(results);
 	}) // db.all
 })
@@ -41,14 +41,14 @@ app.get('/event/one/:id', (req, res, next) => {
 
 app.get('/bulletin/all', (req, res, next) => {
 	db.all('SELECT * FROM bulletin', (error, results) => {
-		if (error) throwerror;
+		if (error) throw error;
 		return res.status(200).json(results);
 	}) // db.all
 })
 
 app.get('/aircraft/all', (req, res, next) => {
 	db.all('SELECT * FROM aircraft', (error, results) => {
-		if (error) throwerror;
+		if (error) throw error;
 		return res.status(200).json(results);
 	}) // db.all
 })
@@ -66,7 +66,7 @@ app.get('/aircraft/one/:id', (req, res, next) => {
 
 app.get('/booking/all', (req, res, next) => {
 	db.all('SELECT * FROM booking', (error, results) => {
-		if (error) throwerror;
+		if (error) throw error;
 		return res.status(200).json(results);
 	}) // db.all
 })
