@@ -7,7 +7,7 @@ db.serialize( () => {
 	let sql = "CREATE TABLE event (" +
 			  "id integer PRIMARY KEY NOT NULL, " +
 			  "title text NOT NULL, " +
-			  "date date NOT NULL, " +
+			  "start datetime NOT NULL, " +
 			  "location text, " +
 			  "description text )";
 
@@ -67,8 +67,8 @@ db.serialize( () => {
 	})
 
     // Event inserts
-	sql = "INSERT INTO `event` (`id`, `title`, `date`, `location`, `description`) "+
-	" VALUES (1, 'Summer Party', '2022-06-20', 'Clubroom', 'The annual club summer party is here again! Enjoy sauna, barbeque, cold drinks and come tell your best flying stories of the summer!')";
+	sql = "INSERT INTO `event` (`id`, `title`, `start`, `location`, `description`) "+
+	" VALUES (1, 'Summer Party', '2023-06-20 16:00', 'Clubroom', 'The annual club summer party is here again! Enjoy sauna, barbeque, cold drinks and share your best flying stories of the summer!')";
 	db.run(sql, (err) => {
 		if (err) {
 		  return console.log(err.message);
@@ -76,8 +76,8 @@ db.serialize( () => {
 		console.log("Row1 added to event");
 	})
 
-	sql = sql = "INSERT INTO `event` (`id`, `title`, `date`, `location`, `description`) " +
-    "VALUES (2, 'Maintenace Day', '2022-07-15', 'Clubroom, Sauna, Hangar', 'Help us keep our premises clean and organized! The club will provide lunch and refreshments.')"
+	sql = sql = "INSERT INTO 'event' ('id', 'title', 'start', 'location', 'description') " +
+    "VALUES (2, 'Maintenace Day', '2023-09-10 13:00', 'Clubroom, Sauna, Hangar', 'Help us keep our premises clean and organized! The club will provide food and refreshments.')"
 	db.run(sql, (err) => {
 		if (err) {
 			return console.log(err.message);
@@ -85,17 +85,17 @@ db.serialize( () => {
 		console.log("Row2 added to event");
 	})
 
-	sql = "INSERT INTO `event` (`id`, `title`, `date`, `location`, `description`) " +
-    "VALUES (3, 'Precision Landing Contest', '2022-08-05', 'EFPR', 'Put your piloting skills to the test in our precision landing contest! Compete against other pilots for prizes and bragging rights. Copmetiton will be flown with our C152 aircraft. Registrations to anni.ehrnrooth@heac.net')"
+	sql = "INSERT INTO 'event' ('id', 'title', 'start', 'location', 'description') " +
+    "VALUES (3, 'Precision Landing Contest', '2023-08-05 09:00', 'EFPR', 'Put your piloting skills to the test in our precision landing contest! Compete against other pilots for prizes and bragging rights. Copmetiton will be flown with our C152 aircraft. Registrations to anni.ehrnrooth@heac.net')"
 	db.run(sql, (err) => {
 		if (err) {
 			return console.log(err.message);
 		}
 		console.log("Row3 added to event");
 	})
-
-    sql = "INSERT INTO `event` (`id`, `title`, `date`, `location`, `description`) " +
-    "VALUES (4, 'Drone Safety Course', '2022-09-10', 'Classroom', 'Learn how to operate your drone safely and responsibly in our comprehensive drone safety course. Open to all drone enthusiasts, regardless of experience level.')"
+	
+    sql = "INSERT INTO `event` (`id`, `title`, `start`, `location`, `description`) " +
+    "VALUES (4, 'Drone Safety Course', '2023-07-15 15:00', 'Classroom', 'Learn how to operate your drone safely and responsibly in our comprehensive drone safety course. Open to all drone enthusiasts, regardless of experience level.')"
 	db.run(sql, (err) => {
 		if (err) {
 			return console.log(err.message);
@@ -112,7 +112,7 @@ db.serialize( () => {
 
     // Bulletin inserts
     sql = "INSERT INTO `bulletin` (`id`, `title`, `date`, `text`) " +
-            "VALUES (1, 'Warning: Heavy Bird Activity', '2022-06-01', 'Due to the summer migration of birds, we are experiencing heavy bird activity in and around the airfield. Please take extra precautions when taking off and landing, and be sure to scan the runway and surrounding areas for birds before each flight.')"
+            "VALUES (1, 'Warning: Heavy Bird Activity', '2023-06-01', 'Due to the summer migration of birds, we are experiencing heavy bird activity in and around the airfield. Please take extra precautions when taking off and landing, and be sure to scan the runway and surrounding areas for birds before each flight.')"
 	db.run(sql, (err) => {
 		if (err) {
 		  return console.log(err.message);
@@ -121,7 +121,7 @@ db.serialize( () => {
 	})
 
     sql = "INSERT INTO `bulletin` (`id`, `title`, `date`, `text`) " +
-            "VALUES (2, 'Runway Construction Work', '2022-07-01', 'Construction work will be taking place on the runway from July 5th to July 15th. During this time, the runway will be closed and unavailable for use. We apologize for any inconvenience this may cause and appreciate your cooperation.')"
+            "VALUES (2, 'Runway Construction Work', '2023-07-01', 'Construction work will be taking place on the runway from July 5th to July 15th. During this time, the runway will be closed and unavailable for use. We apologize for any inconvenience this may cause and appreciate your cooperation.')"
 	db.run(sql, (err) => {
 		if (err) {
 		  return console.log(err.message);

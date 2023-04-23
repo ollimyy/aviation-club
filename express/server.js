@@ -39,6 +39,13 @@ app.get('/event/one/:id', (req, res, next) => {
 	}) // db.get
 })
 
+app.get('/event/upcoming', (req, res, next) => {
+	db.all('SELECT * FROM event WHERE datetime(start) >= datetime("now") ORDER BY datetime(start) ASC;', (error, results) => {
+		if (error) throw error;
+		return res.status(200).json(results);
+	}) // db.all
+})
+
 app.get('/bulletin/all', (req, res, next) => {
 	db.all('SELECT * FROM bulletin', (error, results) => {
 		if (error) throw error;
