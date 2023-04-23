@@ -19,7 +19,7 @@ export default function Navigation() {
 
     return(
         <Box>
-            <AppBar position="fixed" color="primary">
+            <AppBar position="sticky" color="primary">
                 <Toolbar>
                     <Typography variant="h6" noWrap marginRight="1em">
                         Helsinki East Aviation Club
