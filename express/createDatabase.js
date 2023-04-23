@@ -27,7 +27,7 @@ db.serialize( () => {
               "year integer, " +
               "engine text, " +
               "seating_capacity integer, " +
-              "rent_price integer, " +
+              "rent_price numeric, " +
               "image text)";
 
 	db.run(sql, (err) => {
@@ -138,9 +138,9 @@ db.serialize( () => {
 
     // Aircraft inserts
     sql = "INSERT INTO aircraft (registration, manufacturer, model, year, engine, seating_capacity, rent_price, image) " +
-              "VALUES ('OH-CFF', 'Cessna', 'C152', 1979, 'Lycoming O-235', 2, 8, 'cessna152.jpg'), " +
-              "('OH-CHZ', 'Cessna', 'C172', 1998, 'Lycoming IO-360', 4, 10, 'cessna172.jpg'), " +
-              "('OH-DAZ', 'Diamond Aircraft', 'DA40', 2014, 'Austro AE300', 4, 12, 'diamond-da40.jpg')";
+              "VALUES ('OH-CFF', 'Cessna', 'C152', 1979, 'Lycoming O-235', 2, 2.5, 'cessna152.jpg'), " +
+              "('OH-CHZ', 'Cessna', 'C172', 1998, 'Lycoming IO-360', 4, 3, 'cessna172.jpg'), " +
+              "('OH-DAZ', 'Diamond Aircraft', 'DA40', 2014, 'Austro AE300', 4, 3.75, 'diamond-da40.jpg')";
 	db.run(sql, (err) => {
 		if (err) {
 		  return console.log(err.message);
