@@ -53,6 +53,24 @@ app.get('/aircraft/all', (req, res, next) => {
 	}) // db.all
 })
 
+app.get('/aircraft/one/:id', (req, res, next) => {
+	let id = req.params.id;
+	db.get('SELECT * FROM aircraft where id=?', [id], (error, result) => {
+		if (error) throw error;
+		if (typeof (result) == 'undefined') {
+			return res.status(200).json({});
+		}
+		return res.status(200).json(result);
+	}) // db.get
+})
+
+app.get('/booking/all', (req, res, next) => {
+	db.all('SELECT * FROM booking', (error, results) => {
+		if (error) throwerror;
+		return res.status(200).json(results);
+	}) // db.all
+})
+
 const multer = require('multer');
 
 const storage = multer.diskStorage({

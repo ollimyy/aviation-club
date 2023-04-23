@@ -51,9 +51,24 @@ db.serialize( () => {
 		console.log("Table bulletin created");
 	})
 
+	// Create Booking
+	sql = "CREATE TABLE booking (" +
+			  "id integer PRIMARY KEY NOT NULL, " +
+			  "start datetime NOT NULL, " +
+			  "end datetime NOT NULL, " +
+			  "aircraft_id integer NOT NULL," +
+			  "FOREIGN KEY (aircraft_id) REFERENCES aircraft(id))";
+
+	db.run(sql, (err) => {
+		if (err) {
+		  return console.log(err.message);
+		}
+		console.log("Table booking created");
+	})
+
     // Event inserts
 	sql = "INSERT INTO `event` (`id`, `title`, `date`, `location`, `description`) "+
-	" VALUES (1, 'Club Summer Party', '2022-06-20', 'Clubroom', 'The annual club summer party is here again! Enjoy sauna, barbeque, cold drinks and come tell your best flying stories of the summer!')";
+	" VALUES (1, 'Summer Party', '2022-06-20', 'Clubroom', 'The annual club summer party is here again! Enjoy sauna, barbeque, cold drinks and come tell your best flying stories of the summer!')";
 	db.run(sql, (err) => {
 		if (err) {
 		  return console.log(err.message);
@@ -62,7 +77,7 @@ db.serialize( () => {
 	})
 
 	sql = sql = "INSERT INTO `event` (`id`, `title`, `date`, `location`, `description`) " +
-    "VALUES (2, 'Club Maintenace Day', '2022-07-15', 'Clubroom, Sauna, Hangar', 'Help us keep our premises clean and organized! The club will provide lunch and refreshments.')"
+    "VALUES (2, 'Maintenace Day', '2022-07-15', 'Clubroom, Sauna, Hangar', 'Help us keep our premises clean and organized! The club will provide lunch and refreshments.')"
 	db.run(sql, (err) => {
 		if (err) {
 			return console.log(err.message);
@@ -138,6 +153,23 @@ db.serialize( () => {
 		  return console.log(err.message);
 		}
 		console.log(row.registration);
+	})
+
+	// Booking inserts
+	sql = "INSERT INTO booking (id, start, end, aircraft_id) VALUES (1, '2023-04-25 10:00:00', '2023-04-25 12:00:00', 1), " +
+	"(2, '2023-04-27 08:00:00', '2023-04-27 10:00:00', 3);";
+	db.run(sql, (err) => {
+		if (err) {
+		  return console.log(err.message);
+		}
+		console.log("2 rows added to booking");
+	})
+
+    db.each("SELECT id FROM booking", function(err, row) {
+		if (err) {
+		  return console.log(err.message);
+		}
+		console.log(row.id);
 	})
 
 	db.close();
