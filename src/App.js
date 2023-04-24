@@ -3,6 +3,7 @@ import Navigation from "./components/Navigation";
 import HomePage from "./components/HomePage";
 import AircraftList from "./components/AircraftList";
 import UpcomingEventList from "./components/UpcomingEventList";
+import EventsPage from "./components/EventsPage";
 
 
 function App() {
@@ -13,7 +14,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/aircraft" element={<AircraftList />} />
-          <Route path="/events" element={<UpcomingEventList />} />
+          <Route path="/events" element={<EventsPage />} />
         </Routes>
       </BrowserRouter>
     </div>
