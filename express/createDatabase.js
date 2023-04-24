@@ -77,7 +77,7 @@ db.serialize( () => {
 	})
 
 	sql = sql = "INSERT INTO 'event' ('id', 'title', 'start', 'location', 'description') " +
-    "VALUES (2, 'Maintenace Day', '2023-09-10 13:00', 'Clubroom, Sauna, Hangar', 'Help us keep our premises clean and organized! The club will provide food and refreshments.')"
+    "VALUES (2, 'Maintenace Day', '2023-07-15 13:00', 'Clubroom, Sauna, Hangar', 'Help us keep our premises clean and organized! The club will provide food and refreshments.')"
 	db.run(sql, (err) => {
 		if (err) {
 			return console.log(err.message);

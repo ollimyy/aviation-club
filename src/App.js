@@ -2,7 +2,6 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Navigation from "./components/Navigation";
 import HomePage from "./components/HomePage";
 import AircraftList from "./components/AircraftList";
-import UpcomingEventList from "./components/UpcomingEventList";
 import EventsPage from "./components/EventsPage";
 
 
