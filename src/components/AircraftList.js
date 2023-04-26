@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { fetchAircraft } from "../modules/aircraft.js";
-import { Card, CardHeader, CardMedia, CardContent, Typography, Grid, Divider, Box } from "@mui/material";
+import { Card, CardHeader, CardMedia, CardContent, Typography, Grid, Box } from "@mui/material";
 
 
 export default function AircraftList() {
