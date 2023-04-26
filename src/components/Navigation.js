@@ -4,14 +4,7 @@ import { useState } from "react";
 import { Link } from 'react-router-dom';
 
 
-export default function Navigation() {
-
-    const pages = [
-        { text: 'Home', path: '/' },
-        { text: 'Make a booking', path: '/new-booking' },
-        { text: 'Aircraft', path: '/aircraft' },
-        { text: 'Events', path: '/events' },
-      ];
+export default function Navigation({pages}) {
 
     const [open, setOpen] = useState(false);
     const handleOpen = () => { setOpen(true); }
