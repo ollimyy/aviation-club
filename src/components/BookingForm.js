@@ -98,7 +98,7 @@ export default function BookingForm() {
     <Box sx={{marginTop: 3, maxWidth: 1400}}>
       <Grid container spacing={2}>
         <Grid item xs={12} md={4}>
-        <Paper sx={{padding: 2, maxWidth: 500}}>
+        <Paper sx={{padding: 2, maxWidth: 500, margin: 1}}>
           <Typography variant="h4" sx={{marginBottom: 2}}>Book an aircraft</Typography>
           <FormControl fullWidth sx={{'& .MuiTextField-root': {marginBottom: 4}}}>
 
@@ -132,10 +132,13 @@ export default function BookingForm() {
               onChange={(e) => changeTime(e, 'end')}
               renderInput={ (params) => <TextField {...params} fullWidth />}
             />
-            <Button variant="contained" onClick={addBooking}>Submit</Button>
+            <Button variant="contained" color="secondary" onClick={addBooking} sx={{ width: '100px' }}>
+              Submit
+            </Button>
           </FormControl>
-          
         </Paper>
+        <Typography sx={{margin: 2, fontWeight: 'bold'}}>{message}</Typography>
+
         </Grid>
         <Grid item xs={12} md={8}>
           <Box sx={{maxWidth: 300, marginLeft: 3}}>
@@ -149,7 +152,6 @@ export default function BookingForm() {
           </Box>
         </Grid>
       </Grid>
-      <Typography sx={{margin: 2, fontWeight: 'bold'}}>{message}</Typography>
     </Box>
   );
 }

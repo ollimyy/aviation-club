@@ -66,7 +66,7 @@ export default function EventCalendar() {
     }
 
     return(
-        <div>
+        <Box sx={{padding: 2}}>
             {message}
             <Calendar
                 tileClassName={tileClassName}
@@ -97,6 +97,6 @@ export default function EventCalendar() {
                     );
                 })}
             </Box>
-        </div>
+        </Box>
     );
 }

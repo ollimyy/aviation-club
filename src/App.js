@@ -10,9 +10,29 @@ import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import DateFnsUtils from '@date-io/date-fns';
 import fiLocale from 'date-fns/locale/fi'
 
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
+
 
 
 function App() {
+
+  const theme = createTheme({
+    palette: {
+      primary: {
+        main: "#8B3A3A",
+      },
+      secondary: {
+        main: "#27632E ",
+      },
+      background: {
+        default: "#f2f2f2",
+      },
+    },
+    typography: {
+      fontFamily: "'Source Sans Pro'"
+    }
+  })
 
   const pages = [
     { text: 'Home', path: '/' },
@@ -24,6 +44,8 @@ function App() {
   return (
     <div className="App">
       <LocalizationProvider dateAdapter={AdapterDateFns} utils={DateFnsUtils} adapterLocale={fiLocale}>
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
       <BrowserRouter>
         <Navigation pages={pages} />
         <Routes>
@@ -33,6 +55,7 @@ function App() {
           <Route path="/new-booking" element={<BookingForm />} />
         </Routes>
       </BrowserRouter>
+      </ThemeProvider>
       </LocalizationProvider>
     </div>
   );

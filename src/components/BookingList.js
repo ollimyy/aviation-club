@@ -17,8 +17,6 @@ export default function BookingList() {
         }
     }
 
-    
-
     useEffect(() => {
         getBookings();
     }, []);
@@ -31,26 +29,38 @@ export default function BookingList() {
         return(<p>No bookings found</p>)
     }
 
-    return (
+    const styles = {
+        tableHead: {
+          backgroundColor: '#757575',
+          fontWeight: 'bold',
+          color: 'white',
+        },
+        tableCell: {
+          backgroundColor: 'white',
+          color: 'black',
+        },
+      };
+
+      return (
         <TableContainer>
-            <Table>
-                <TableHead>
-                    <TableRow>
-                        <TableCell>Aircraft</TableCell>
-                        <TableCell>Start</TableCell>
-                        <TableCell>End</TableCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {bookings.map((booking) => (
-                        <TableRow key={booking.id}>
-                            <TableCell>{booking.aircraft}</TableCell>
-                            <TableCell>{booking.start}</TableCell>
-                            <TableCell>{booking.end}</TableCell>
-                        </TableRow>
-                    ))}
-                </TableBody>
-            </Table>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell sx={styles.tableHead}>Aircraft</TableCell>
+                <TableCell sx={styles.tableHead}>Start</TableCell>
+                <TableCell sx={styles.tableHead}>End</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {bookings.map((booking) => (
+                <TableRow key={booking.id}>
+                  <TableCell sx={styles.tableCell}>{booking.aircraft}</TableCell>
+                  <TableCell sx={styles.tableCell}>{booking.start}</TableCell>
+                  <TableCell sx={styles.tableCell}>{booking.end}</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
         </TableContainer>
-    );
+      );
 }

@@ -31,7 +31,7 @@ export default function AircraftList() {
     }
 
     return (
-        <Box sx={{marginTop: '1em'}}>
+        <Box sx={{margin: '1em'}}>
             <Typography variant="h4" sx={{ marginTop: '1em', marginBottom: '1em' }}>
                 Our Fleet:
             </Typography>
