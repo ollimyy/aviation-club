@@ -78,6 +78,17 @@ app.get('/booking/all', (req, res, next) => {
 	}) // db.all
 })
 
+app.post('/booking/add', (req, res, next) => {
+	let tap = req.body;
+
+	db.run('INSERT INTO booking (start, end, aircraft) VALUES (?, ?, ?)',
+	[tap.start, tap.end, tap.aircraft], (error, result) => {
+		if (error) throw error;
+
+		return res.status(200).json( {count: 1} );
+	}) // db.run
+})
+
 const multer = require('multer');
 
 const storage = multer.diskStorage({

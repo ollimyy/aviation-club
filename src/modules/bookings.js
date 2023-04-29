@@ -10,3 +10,11 @@ export const fetchBookings = async () => {
         throw new Error('Failed to load bookings');
     }
 }
+
+export const saveBooking = async (booking) => {
+    try {
+        await axios.post(server + '/booking/add', booking)
+    } catch (error) {
+        throw new Error('Failed to save booking')
+    }
+}

@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { Box, Button, FormControl, Grid, InputLabel, MenuItem, Paper, Select, TextField, Typography } from "@mui/material";
 import { DateTimePicker } from "@mui/x-date-pickers";
 import { fetchAircraft } from "../modules/aircraft";
+import { saveBooking } from "../modules/bookings";
+import { format } from 'date-fns';
 
 
 export default function BookingForm() {
@@ -11,17 +13,19 @@ export default function BookingForm() {
     end: '',
     aircraft: ''
   })
+
   const [aircraft, setAircraft] = useState([]);
-  const [message, setMessage] = useState('Loading');
+  const [errorMessage, setErrorMessage] = useState('Loading');
   const [rentPrice, setRentPrice] = useState([]);
+  const [message, setMessage] = useState ('');
 
   const getAircraft = async () => {
     try {
         let data = await fetchAircraft();
         setAircraft(data);
-        setMessage('');
+        setErrorMessage('');
     } catch (error) {
-        setMessage('Failed to load aircraft');
+        setErrorMessage('Failed to load aircraft');
     }
 
     }
@@ -29,8 +33,8 @@ export default function BookingForm() {
         getAircraft();
     }, []);
 
-    if (message.length > 0){
-        return(<p>{message}</p>)
+    if (errorMessage.length > 0){
+        return(<p>{errorMessage}</p>)
     }
 
     if (aircraft.length === 0){
@@ -39,6 +43,7 @@ export default function BookingForm() {
 
 
     const changeAircraft = (e) => {
+      setMessage('');
       setBooking({
         ...booking,
         aircraft: e.target.value,
@@ -48,13 +53,46 @@ export default function BookingForm() {
     }
 
   const changeTime = (e, field) => {
+    setMessage('');
     setBooking({
       ...booking,
       [field]: e
     });
   }
-  
-  console.log(booking)
+
+  const addBooking = async (e) => {
+    
+    const start = new Date(booking.start);
+    const end = new Date(booking.end);
+
+    if (booking.start === '' || booking.end === '' || booking.aircraft === '') {
+      setMessage('Please fill in all fields.');
+      return;
+    }
+
+    if (start.getTime() >= end.getTime()) {
+      setMessage('End time must be after start time.');
+      return;
+    }
+
+    const formData = {
+      start: format(start, 'yyyy-MM-dd HH:mm:ss'),
+      end: format(end, 'yyyy-MM-dd HH:mm:ss'),
+      aircraft: booking.aircraft
+    }
+
+    try {
+      await saveBooking(formData); 
+      setBooking({
+        start: '',
+        end: '',
+        aircraft: ''
+      });
+      setMessage('Booking saved.');
+    } catch (error) {
+      setMessage('Couldn\'t save booking');
+    }
+  }
 
   return (
     <Box sx={{marginTop: 3, maxWidth: 1400}}>
@@ -62,7 +100,7 @@ export default function BookingForm() {
         <Grid item xs={12} md={4}>
         <Paper sx={{padding: 2, maxWidth: 500}}>
           <Typography variant="h4" sx={{marginBottom: 2}}>Book an aircraft</Typography>
-          <FormControl full fullWidth sx={{'& .MuiTextField-root': {marginBottom: 4}}}>
+          <FormControl fullWidth sx={{'& .MuiTextField-root': {marginBottom: 4}}}>
 
             <InputLabel id="aircraft-select-label">Aircraft</InputLabel>
             <Select
@@ -71,7 +109,6 @@ export default function BookingForm() {
               value={booking.aircraft}
               sx={{marginBottom: 2}}
               onChange={changeAircraft}
-              required
               >
                 {aircraft.map((aircraft) => {
                   return(
@@ -86,16 +123,16 @@ export default function BookingForm() {
               label="Start time"
               value={booking.start}
               onChange={(e) => changeTime(e, 'start')}
-              renderInput={ (params) => <TextField {...params} required fullWidth />}
+              renderInput={ (params) => <TextField {...params} fullWidth />}
             />
 
             <DateTimePicker 
               label="End time"
               value={booking.end}
               onChange={(e) => changeTime(e, 'end')}
-              renderInput={ (params) => <TextField {...params} required fullWidth />}
+              renderInput={ (params) => <TextField {...params} fullWidth />}
             />
-            <Button variant="contained" >Submit</Button>
+            <Button variant="contained" onClick={addBooking}>Submit</Button>
           </FormControl>
           
         </Paper>
@@ -112,6 +149,7 @@ export default function BookingForm() {
           </Box>
         </Grid>
       </Grid>
+      <Typography sx={{margin: 2, fontWeight: 'bold'}}>{message}</Typography>
     </Box>
   );
 }
