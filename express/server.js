@@ -29,7 +29,7 @@ app.get('/event/all', (req, res, next) => {
 })
 
 app.get('/event/one/:id', (req, res, next) => {
-	let id = req.params.id;
+	const id = req.params.id;
 	db.get('SELECT * FROM event where id=?', [id], (error, result) => {
 		if (error) throw error;
 		if (typeof (result) == 'undefined') {
@@ -61,7 +61,7 @@ app.get('/aircraft/all', (req, res, next) => {
 })
 
 app.get('/aircraft/one/:id', (req, res, next) => {
-	let id = req.params.id;
+	const id = req.params.id;
 	db.get('SELECT * FROM aircraft where id=?', [id], (error, result) => {
 		if (error) throw error;
 		if (typeof (result) == 'undefined') {
@@ -79,7 +79,7 @@ app.get('/booking/all', (req, res, next) => {
 })
 
 app.post('/booking/add', (req, res, next) => {
-	let tap = req.body;
+	const tap = req.body;
 
 	db.run('INSERT INTO booking (start, end, aircraft) VALUES (?, ?, ?)',
 	[tap.start, tap.end, tap.aircraft], (error, result) => {
@@ -88,6 +88,18 @@ app.post('/booking/add', (req, res, next) => {
 		return res.status(200).json( {count: 1} );
 	}) // db.run
 })
+
+app.delete('/booking/:id', (req, res, next) => {
+	const id = req.params.id;
+
+	db.run('DELETE FROM booking WHERE id = ?', id, (error) =>{
+	if (error) throw error;
+	
+	return res.status(200).json({ message: 'Booking deleted.'})
+	});
+}
+)
+
 
 const multer = require('multer');
 
@@ -109,5 +121,5 @@ app.get('/download/:file', (req, res, next) => {
 });
 
 app.get('*', (req, res, next) => {
-	return res.status(404).json({ error: true, message: 'Ei pyydettyä palvelua' });
+	return res.status(404).json({ error: true, message: 'Requested service not found.' });
 })

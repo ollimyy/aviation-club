@@ -18,3 +18,11 @@ export const saveBooking = async (booking) => {
         throw new Error('Failed to save booking')
     }
 }
+
+export const deleteBooking = async (bookingId) => {
+    try {
+        await axios.delete(`${server}/booking/${bookingId}`)
+    } catch (error) {
+        throw new Error('Failed to delete booking')
+    }
+}

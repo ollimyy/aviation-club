@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
-import { fetchBookings } from "../modules/bookings";
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
+import { fetchBookings, deleteBooking } from "../modules/bookings";
+import { Button, Card, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
+import { confirmAlert } from 'react-confirm-alert';
+import 'react-confirm-alert/src/react-confirm-alert.css';
+import { red, green } from '@mui/material/colors';
 
 
 export default function BookingList() {
@@ -16,18 +19,49 @@ export default function BookingList() {
             setMessage('Failed to load bookings');
         }
     }
-
-    useEffect(() => {
-        getBookings();
-    }, []);
-
-    if (message.length > 0){
-        return(<p>{message}</p>)
-    }
-
-    if (bookings.length === 0){
-        return(<p>No bookings found</p>)
-    }
+    
+    const handleDelete = async (booking) => {
+      
+      confirmAlert({
+        customUI: ({ onClose }) => {
+          return (
+            <Card sx={{padding: 3}}>
+            <div className="custom-ui">
+              <h1>Confirm Cancellation</h1>
+              <p>Are you sure you want to cancel this booking?</p>
+              <p>Aircraft: {booking.aircraft}</p>
+              <p>Start time: {booking.start}</p>
+              <p>End time: {booking.end}</p>
+              <Button 
+                variant="contained"
+                sx={{margin: 1}}
+                style={{ backgroundColor: green[500], color: 'white' }}
+                onClick={async () => {
+                  try {
+                    await deleteBooking(booking.id);
+                    const data = await fetchBookings();
+                    setBookings(data);
+                  } catch (error) {
+                    setMessage('Failed to cancel booking.')
+                  }
+                  onClose();
+                }}
+              >
+                Yes
+              </Button>
+              <Button 
+              variant="contained"
+              style={{ backgroundColor: red[500], color: 'white' }}
+              sx={{margin: 1}}
+              onClick={onClose}>
+                No
+              </Button>
+            </div>
+            </Card>
+          );
+        }
+      });
+    };
 
     const styles = {
         tableHead: {
@@ -41,6 +75,19 @@ export default function BookingList() {
         },
       };
 
+    useEffect(() => {
+        getBookings();
+    }, []);
+
+
+    if (message.length > 0){
+        return(<p>{message}</p>)
+    }
+
+    if (bookings.length === 0){
+        return(<p>No bookings found</p>)
+    }
+
       return (
         <TableContainer>
           <Table>
@@ -49,6 +96,7 @@ export default function BookingList() {
                 <TableCell sx={styles.tableHead}>Aircraft</TableCell>
                 <TableCell sx={styles.tableHead}>Start</TableCell>
                 <TableCell sx={styles.tableHead}>End</TableCell>
+                <TableCell sx={styles.tableHead}></TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -57,6 +105,9 @@ export default function BookingList() {
                   <TableCell sx={styles.tableCell}>{booking.aircraft}</TableCell>
                   <TableCell sx={styles.tableCell}>{booking.start}</TableCell>
                   <TableCell sx={styles.tableCell}>{booking.end}</TableCell>
+                  <TableCell sx={styles.tableCell}>
+                    <Button onClick={() => handleDelete(booking)}>Cancel</Button>
+                  </TableCell>
                 </TableRow>
               ))}
             </TableBody>
