@@ -3,8 +3,6 @@ import { fetchBookings, deleteBooking } from "../modules/bookings";
 import { Button, Card, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from "@mui/material";
 import { confirmAlert } from 'react-confirm-alert';
 import 'react-confirm-alert/src/react-confirm-alert.css';
-import { red, green } from '@mui/material/colors';
-
 
 export default function BookingList() {
     const [bookings, setBookings] = useState([]);
@@ -35,7 +33,7 @@ export default function BookingList() {
               <Button 
                 variant="contained"
                 sx={{margin: 1}}
-                style={{ backgroundColor: green[500], color: 'white' }}
+                color="success"
                 onClick={async () => {
                   try {
                     await deleteBooking(booking.id);
@@ -51,7 +49,7 @@ export default function BookingList() {
               </Button>
               <Button 
               variant="contained"
-              style={{ backgroundColor: red[500], color: 'white' }}
+              color="inherit"
               sx={{margin: 1}}
               onClick={onClose}>
                 No
