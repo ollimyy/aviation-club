@@ -156,8 +156,8 @@ db.serialize( () => {
 	})
 
 	// Booking inserts
-	sql = "INSERT INTO booking (id, start, end, aircraft) VALUES (1, '2023-04-25 10:00:00', '2023-04-25 12:00:00', 'OH-CFF'), " +
-	"(2, '2023-04-27 08:00:00', '2023-04-27 10:00:00', 'OH-DAZ');";
+	sql = "INSERT INTO booking (id, start, end, aircraft) VALUES (1, '2023-06-25 10:00:00', '2023-06-25 12:00:00', 'OH-CFF'), " +
+	"(2, '2023-06-27 08:00:00', '2023-06-27 10:00:00', 'OH-DAZ');";
 	db.run(sql, (err) => {
 		if (err) {
 		  return console.log(err.message);

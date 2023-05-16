@@ -11,7 +11,7 @@ export default function NotamList() {
         try {
             // api key only for 100 calls, if broken check key first
             // https://applications.icao.int/dataservices/default.aspx
-            const response = await fetch('')
+            const response = await fetch('https://applications.icao.int/dataservices/api/notams-realtime-list?api_key=0d4d3be5-c19b-4c84-81ce-94dd034856aa&format=json&locations=efpr')
             const json = await response.json();
 
             setNotamData(json);
@@ -40,7 +40,7 @@ export default function NotamList() {
         return (
           <Card sx={{margin: 2}}>
             <CardContent>
-                <Typography variant="h5" sx={{ marginBottom: 4}}>{notamData[0].location}</Typography>
+                <Typography variant="h5" sx={{ marginBottom: 4}}>EFPR</Typography>
                 {notamData.map((notam, index) => {
 
                     const start = new Date(notam.startdate);
@@ -55,10 +55,10 @@ export default function NotamList() {
 
 
                     <Box key={notam.id}>
-                        <Typography>
+                        <Typography sx={{ fontFamily: 'Roboto Mono' }}>
                             {notam.message}
                         </Typography>
-                        <Typography sx={{ marginBottom: isLastItem ? 0 : 4 }}>
+                        <Typography sx={{ marginBottom: isLastItem ? 0 : 4, fontFamily: 'Roboto Mono' }}>
                             <span style={{ fontWeight: 'bold' }}>FROM:</span> {startFormatted}
                             <span style={{ fontWeight: 'bold' }}> TO:</span> {endFormatted}
                         </Typography>
@@ -69,9 +69,15 @@ export default function NotamList() {
           </Card>
         );
     } else if(error){
-        return <p>Failed to load NOTAMs. Check up to date NOTAMs at <a href="https://www.ais.fi/ais/bulletins/envfrm-fr.htm" target="_blank" rel="noreferrer">ais.fi</a>.</p>
+        return <p>Failed to load NOTAMs. Check up to date NOTAMs at 
+            <a href="https://www.ais.fi/ais/bulletins/envfrm-fr.htm" target="_blank" rel="noreferrer">ais.fi/ais/bulletins</a>.</p>
     } else {
-        return <p>NIL</p>;
+        return (
+        <div>
+            <Typography variant="h5" sx={{ marginBottom: 4}}>EFPR</Typography>
+           <p>NIL</p>
+        </div>
+        );
     }
       
 }

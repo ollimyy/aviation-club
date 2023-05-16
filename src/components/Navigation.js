@@ -13,8 +13,8 @@ export default function Navigation({pages}) {
     return(
         <Box>
             <AppBar position="sticky" color="primary">
-                <Toolbar>
-                    <Typography variant="h6" noWrap marginRight="1em">
+                <Toolbar sx={{ display: 'flex', justifyContent: {xs: 'space-between', sm: 'flex-start'}}}>
+                    <Typography variant="h6" noWrap marginRight="1em" sx={{ fontFamily: 'Oswald', fontWeight: '400' }}>
                         Helsinki East Aviation Club
                     </Typography>
 
@@ -29,7 +29,7 @@ export default function Navigation({pages}) {
                     </Box>
 
                     <Box sx={{display: { sm: 'none'}}}>
-                        <IconButton onClick={handleOpen}>
+                        <IconButton onClick={handleOpen} color="inherit">
                             <MenuIcon />
                         </IconButton>
                     </Box>
